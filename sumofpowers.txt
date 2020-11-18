@@ -1,0 +1,17 @@
+#include <iostream>
+#include <cmath>
+ 
+int main(){
+  int x, n, sum;
+  sum=0;
+  std::cout<<"Please enter values for x and n"<<std::endl;
+  std::cin>>x>>n; 
+  double pow (double base,double exponent); 
+  for(int i=1;i<n;i++){
+    sum=sum+(pow(x,i));
+    std::cout<<"top of loop"<<std::endl;
+    std::cout<<"current sum for exponent "<<i<<" is "<<sum<<std::endl;
+    std::cout<<"end of loop"<<std::endl<<std::endl;
+  }
+  std::cout<<"the sum is "<<sum<<std::endl;
+}
