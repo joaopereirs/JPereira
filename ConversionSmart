@@ -22,5 +22,5 @@ int main(){
         std::cout << temp_out << " " << unit_out << std::endl;
     }if(unit_in != "F"&&"C"){
       std::cout << "Unit not recognised" << std::endl;
-    }  
+    }
 }
