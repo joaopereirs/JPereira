@@ -1,0 +1,11 @@
+#include <iostream>
+ 
+int main(){
+    double celcius, farenheit;
+    std::cout << "welcome to the temperature conversion!" << std::endl;
+    std::cout << "please enter the temperature in celcius" << std::endl;
+    std::cin >> celcius;
+    farenheit = (celcius * (9.0/5))+32;
+    std::cout << celcius << "ºC is " << farenheit << " in farenheit" << std::endl;
+
+}

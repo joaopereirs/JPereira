@@ -1,0 +1,23 @@
+#include <iostream>
+
+int main(){
+    int n;
+    std::cin >> n;
+ 
+    // n times we draw one row
+    // note that we need a different variable
+    // for the loop counter
+    for(int c2 = 1; c2 < (n+1); c2++){
+ 
+        // the following loop draws one row
+        for(int c = 1; c < (n+1); c++){
+            int product = c2*c;
+            std::cout << product << "\t";
+        }
+ 
+        std::cout << std::endl;
+        // we go on a newline after each row
+ 
+    }
+ 
+}

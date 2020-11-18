@@ -1,0 +1,12 @@
+#include <iostream>
+ 
+int main(){
+  int n, v;
+  std::cout << "Value for n" << std::endl;
+  std::cin >> n;
+  v=n;
+    for(int i = 1; i < n; i++){
+        v=v*(n-i);
+    }
+  std::cout << v << std::endl;
+}

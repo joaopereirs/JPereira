@@ -1,0 +1,23 @@
+#include <iostream>
+ 
+int main(){
+    double n1, n2, product;
+    // double is the type, which represents general decimal numbers
+ 
+    std::cout << "please enter the first number" << std::endl;
+    std::cin >> n1;
+ 
+    std::cout << "please enter the second number" << std::endl;
+    std::cin >> n2;
+ 
+    product = n1 * n2;
+ 
+    std::cout << n1 << " × " << n2 << " = " <<  product << std::endl;
+    // this is a printing instruction printing
+    // the value in n1
+    // the symbol + (with spaces)
+    // the value in n2
+    // the symbol = (with spaces)
+    // the value in sum
+    // (and a newline at the end as usual)
+}

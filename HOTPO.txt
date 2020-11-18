@@ -1,0 +1,28 @@
+#include <iostream>
+ 
+int main(){
+  int n, n_lower, n_upper, count, curmax;
+  std::cout<<"Please enter a range of numbers:"<<std::endl;
+  std::cin>>n_lower>>n_upper;
+  for(int i=n_lower; i<(n_upper+1); i++){
+    n=i;
+    curmax=n;
+    for(count=0;n!=1;count++){
+      if(n%2==0){
+        n=n/2;
+        if(n>curmax){
+          curmax=n;
+        }
+        //std::cout<<n<<std::endl;
+      } else {
+        n=((3*n)+1);
+        if(n>curmax){
+          curmax=n;
+        }
+        //std::cout<<n<<std::endl;
+      }
+    }
+    std::cout<<"the number of steps required for "<<i<< " was "<<count<<std::endl;
+    std::cout<<"and the maximum number generated for "<<i<<" was "<<curmax<<std::endl<<std::endl;
+  }
+}
