@@ -1,0 +1,45 @@
+#include <iostream>
+
+// define the function (or functions) here
+// you must define at least one function (which is the one that will be called in the main)
+// however this function in turn can call other functions, if needed
+// (in this case you must define them above it)
+void f2(int *n1, int *n2, int *n3){
+  int tmp, ranking1, ranking2, ranking3;
+  if(n1<n2){
+    ranking1=*n1;
+    ranking2=*n2;
+  }else{
+    ranking1=*n2;
+    ranking2=*n1;
+  }
+  if(ranking2<*n3){
+    ranking3=*n3;   
+  }else if(ranking1>*n3){
+    tmp=ranking1;
+    ranking1=*n3;
+    ranking2=tmp;
+  }else{
+    tmp=ranking2;
+    ranking2=*n3;
+    ranking3=tmp;
+  }
+}
+
+int main(){
+    double n1, n2, n3;
+    std::cin >> n1 >> n2>>n3;
+    f2(&n1,&n2,&n3);
+    std::cout << n1 << " " << n2 <<" "<<n3<< std::endl;
+}
+
+void div(int a, int b, int *quotient, int *remainder) {
+   *quotient = a / b;
+   *remainder = a % b;
+}
+main() {
+   int a = 76, b = 10;
+   int q, r;
+   div(a, b, &q, &r);
+   cout << "Quotient is: "<< q <<"\nRemainder is: "<< r <<"\n";
+}

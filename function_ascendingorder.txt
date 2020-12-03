@@ -1,0 +1,29 @@
+#include <iostream>
+
+double f1(int n1, int n2){
+  int result1,result2;
+  if(n1<n2){
+    result1 = n1;
+    result2 = n2;
+  } else if(n2<n1){
+    result1 = n2;
+    result2 = n1;
+  }
+  return result1;
+  return result2;
+}
+
+int main(){
+    double n1, n2, tmp;
+    std::cin >> n1 >> n2;
+    tmp=n1;
+    n1=f1(n1,n2);
+    if(n1==tmp){
+      std::cout << n1 << " " << n2<<std::endl;
+    }
+    if(n1!=tmp){
+      std::cout << n1 << " " << tmp <<std::endl;
+    }
+ 
+    
+}
