@@ -27,7 +27,4 @@ int main(){
     }
 
     infile.close();
-
-    // TODO: print the content of v in reversed order
-
 }
