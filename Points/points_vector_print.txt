@@ -39,7 +39,7 @@ int main(){
     infile.close();
 
     for(int i=0; i<points.size(); i++){
-        std::cout<<"("+std::to_string(points[i].x)+","+std::to_string(points[i].x)+")"<<std::endl; //vector is in point format, so it hs x and y component
+        std::cout<<"("+std::to_string(points[i].x)+","+std::to_string(points[i].y)+")"<<std::endl; //vector is in point format, so it hs x and y component
         // we use std::to_string to convert from double to std::string
         // the + operator on std::string chains the text together
     }

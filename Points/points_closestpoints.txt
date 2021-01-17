@@ -25,9 +25,7 @@ std::string point_to_s(Point p){
 // (otherwise they will just contain uninitialised values)
 
 void closest_points(const std::vector<Point>& vp, int& idxp1, int& idxp2){
-    // TODO:
-    // complete this function
-    // (make use of function distance_points)
+
     int tmp=std::numeric_limits<int>::max();
     for(int i=0; i<vp.size();i++){
         for (int j = 0; j < vp.size(); ++j) {
@@ -44,9 +42,6 @@ void closest_points(const std::vector<Point>& vp, int& idxp1, int& idxp2){
 
 int main(){
 
-    // TODO:
-    // read the points from the file
-    // and store them in vector points
 
     std::ifstream infile;
     infile.open("points.txt");
