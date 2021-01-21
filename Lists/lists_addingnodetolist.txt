@@ -12,7 +12,7 @@ int main(){
     IntListNode* tmp; // 2
 
     tmp = new IntListNode; // 3
-    *tmp->val = 2; // 4
+    (*tmp).val = 2; // 4
     (*tmp).next = l; // 5
 
     l = tmp; // 6
