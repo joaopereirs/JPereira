@@ -1,9 +1,4 @@
 #include <iostream>
-#include <cmath>
-#include <string>
-#include <vector>
-#include <fstream>
-#include <cstdlib>
 
 typedef int list_t;
 
@@ -41,22 +36,16 @@ void deallocate_list(ListNode* l){
 }
 
 int main(){
-    std::ifstream infile;
-    infile.open("input.txt");
-
-    if(!infile.is_open()){
-        std::cout << "error opening file" << std::endl;
-        return EXIT_FAILURE;
-    }
-
-    int tmp;
     ListNode* l = NULL;
-    while(infile >> tmp){
+
+    std::cout<<"Please enter the number of integers you want to enter:"<<std::endl;
+    int n, tmp;
+    std::cin>>n;
+    std::cout<<"Now please enter "<<n<<" integers:"<<std::endl;
+    for (int i = 0; i < n; ++i) {
+        std::cin>>tmp;
         l = cons_list(tmp, l);
     }
-
-    infile.close();
-
     std::cout<<"The list is: "<<std::endl;
 
     print_list(l);
