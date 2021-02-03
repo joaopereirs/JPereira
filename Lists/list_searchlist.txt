@@ -5,7 +5,7 @@
 #include <fstream>
 #include <cstdlib>
 
-typedef int list_t;
+typedef std::string list_t;
 
 struct ListNode{
     list_t val;
@@ -29,10 +29,8 @@ void deallocate_list(ListNode* l){
     }
 }
 
-bool search_ordered_list(list_t e, ListNode* l){
-
-      while(l != NULL && l->val<=e){
-        std::cout << l->val << std::endl;
+bool search_list(list_t e, ListNode* l){
+    while(l != NULL){
         if (l->val==e){
             return true;
         } else {
@@ -60,7 +58,7 @@ int main(){
     infile.close();
     std::cout<<"what value would you like to know if it is in the list?"<<std::endl;
     std::cin>>e;
-    if (search_ordered_list(e,l)){
+    if (search_list(e,l)){
         std::cout<<"value is in the list!"<<std::endl;
     } else {
         std::cout<<"the value was NOT found in the list..."<<std::endl;
