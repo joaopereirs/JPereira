@@ -42,15 +42,6 @@ int length_list_rec(ListNode* l){
     }
 }
 
-bool search_list_rec(list_t e, ListNode* l){
-    if (length_list_rec(l)==0){
-        return false;
-    } else if (l->val==e){
-        return true;
-    } else {
-        return search_list_rec(e,l->next);
-    }
-}
 
 int main(){
     std::ifstream infile;
@@ -68,14 +59,8 @@ int main(){
     }
 
     infile.close();
-    list_t e;
-    std::cout<<"what value would you like to know if it is in the list?"<<std::endl;
-    std::cin>>e;
-    if (search_list_rec(e,l)){
-        std::cout<<"value is in the list!"<<std::endl;
-    } else {
-        std::cout<<"the value was NOT found in the list..."<<std::endl;
-    }
+
+    std::cout<<"The length of the list is: "<<length_list_rec(l)<<std::endl;
 
     deallocate_list_rec(l);
 }
