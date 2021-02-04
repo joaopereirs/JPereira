@@ -1,0 +1,111 @@
+#include <iostream>
+#include <cmath>
+#include <string>
+#include <vector>
+#include <fstream>
+#include <cstdlib>
+
+typedef int list_t;
+
+struct ListNode{
+    list_t val;
+    ListNode* next;
+};
+
+ListNode* cons_list(list_t e, ListNode* l){
+    ListNode* tmp;
+    tmp = new ListNode;
+    tmp->val = e;
+    tmp->next = l;
+    return tmp;
+}
+
+void deallocate_list(ListNode* l){
+    ListNode* tmp;
+    while(l != NULL){
+        tmp = l->next;
+        delete l;
+        l = tmp;
+    }
+}
+
+void replace_all_instances(list_t e, list_t n, ListNode* l){
+    while (l != NULL){
+        if (l->val == e){
+            l->val = n;
+            l = l->next;
+        }
+        else {
+            l = l->next;
+        }
+    }
+}
+
+bool replace_list(list_t e, list_t n, ListNode* l, bool all){
+    while(l != NULL){
+        if (l->val==e){
+            if (!all){
+                l->val = n; //replaces (only) the first instance
+            } else {
+                replace_all_instances(e,n,l); //replaces all the instances
+            }
+            return true;
+        } else {
+            l = l->next;
+        }
+    }
+    return false;
+}
+
+void print_list(ListNode* l){
+    while(l != NULL){
+        std::cout << l->val << std::endl;
+        l = l->next;
+    }
+}
+
+int main(){
+    std::ifstream infile;
+    infile.open("input.txt");
+
+    if(!infile.is_open()){
+        std::cout << "error opening file" << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    list_t tmp, e,n,a;
+    bool all;
+    ListNode* l = NULL;
+    while(infile >> tmp){
+        l = cons_list(tmp, l);
+    }
+
+    infile.close();
+
+
+    std::cout<<"what value would you like to replace in the list?"<<std::endl;
+    std::cin>>e;
+    std::cout<<"for what value?"<<std::endl;
+    std::cin>>n;
+    std::cout<<"would you like to replace just the first instance (0) or all (1)?"<<std::endl;
+    std::cin>>a;
+    if (a==0){
+        all=false;
+    } else if (a==1){
+        all=true;
+    } else {
+        std::cout<<"value not allowed"<<std::endl;
+    }
+
+    std::cout<<"original list: "<<std::endl;
+    print_list(l);
+
+    if (replace_list(e,n,l,all)){
+        std::cout<<e<<" was found in the list and was replaced by "<<n<<"!"<<std::endl;
+        print_list(l);
+    } else {
+        std::cout<<e<<" was NOT found in the list..."<<std::endl;
+    }
+
+    deallocate_list(l);
+}
