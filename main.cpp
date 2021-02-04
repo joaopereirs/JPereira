@@ -5,7 +5,7 @@
 #include <fstream>
 #include <cstdlib>
 
-typedef int list_t;
+typedef std::string list_t;
 
 struct ListNode{
     list_t val;
