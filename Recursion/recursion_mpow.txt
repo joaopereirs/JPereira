@@ -1,0 +1,25 @@
+#include <iostream>
+#include <cmath>
+#include <string>
+#include <vector>
+#include <fstream>
+#include <cstdlib>
+
+double mpow(double x, int n){
+    if(n == 0){
+        return 1; // base case
+    }
+    else{
+        return x * mpow(x, n - 1); // recursive call
+    }
+}
+
+int main(){
+    double x;
+    int n;
+    std::cout<<"enter first number"<<std::endl;
+    std::cin>>x;
+    std::cout<<"to the power of what?"<<std::endl;
+    std::cin>>n;
+    std::cout<<x<<" to the power of "<<n<<" is: "<<mpow(x,n)<<std::endl;
+}
