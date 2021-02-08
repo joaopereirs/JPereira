@@ -23,13 +23,6 @@ ListNode* cons_list(list_t e, ListNode* l){
     return tmp;
 }
 
-void print_list(ListNode* l){
-    while(l != NULL){
-        std::cout << l->val << std::endl;
-        l = l->next;
-    }
-}
-
 void deallocate_list_rec(ListNode* l){
     ListNode* tmp;
 
@@ -49,17 +42,19 @@ int length_list_rec(ListNode* l){
     }
 }
 
-ListNode* ordered_insertion_list(list_t e, ListNode* l){
-    if (l == NULL){
-        return cons_list(e,l);
+
+bool search_ordered_list_rec(list_t e, ListNode* l){ //value looking for is e in the list l
+    if (length_list_rec(l)==0){
+        return false;
+    } else if (l->val<e){
+        std::cout<<l->val<<std::endl; //to check which values are being read through
+        return search_ordered_list_rec(e,l->next);
+    } else if (l->val==e){
+        return true;
+    } else {
+        return false;
     }
-    else if (e < l->val){
-        return cons_list(e,l);
-    }
-    else {
-        l->next=ordered_insertion_list(e, l->next);
-        return l;
-    }
+
 }
 
 int main(){
@@ -71,26 +66,21 @@ int main(){
         return EXIT_FAILURE;
     }
 
-    list_t tmp, e, user=1;
+    list_t tmp;
     ListNode* l = NULL;
     while(infile >> tmp){
         l = cons_list(tmp, l);
     }
 
     infile.close();
-    //std::string user;
-
-//    list_t e, user=1;
-    std::cout<<"what values would you like to insert into the list (enter 0 to stop)"<<std::endl;
-    while (user != 0){
-        std::cin>>e;
-        if (e == 0){
-            user = 0;
-        } else {
-            ordered_insertion_list(e,l);
-            std::cout<<"Done! Next?"<<std::endl;
-        }
+    list_t e;
+    std::cout<<"what value would you like to know if it is in the list?"<<std::endl;
+    std::cin>>e;
+    if (search_ordered_list_rec(e,l)){
+        std::cout<<"value is in the list!"<<std::endl;
+    } else {
+        std::cout<<"the value was NOT found in the list..."<<std::endl;
     }
-    std::cout<<std::endl<<"the new list is"<<std::endl;
-    print_list(l);
+
+    deallocate_list_rec(l);
 }
