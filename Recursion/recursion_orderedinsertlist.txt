@@ -40,15 +40,6 @@ void deallocate_list_rec(ListNode* l){
     }
 }
 
-int length_list_rec(ListNode* l){
-    if(l != NULL){
-        return 1 + length_list_rec(l->next);
-    }
-    else {
-        return 0;
-    }
-}
-
 ListNode* ordered_insertion_list(list_t e, ListNode* l){
     if (l == NULL){
         return cons_list(e,l);
@@ -78,9 +69,7 @@ int main(){
     }
 
     infile.close();
-    //std::string user;
 
-//    list_t e, user=1;
     std::cout<<"what values would you like to insert into the list (enter 0 to stop)"<<std::endl;
     while (user != 0){
         std::cin>>e;

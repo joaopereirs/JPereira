@@ -62,6 +62,51 @@ ListNode* ordered_insertion_list(list_t e, ListNode* l){
     }
 }
 
+list_t curmax_value(ListNode* l, list_t curmax){
+    list_t tmp=0;
+    while (l != NULL){
+        if (l->val < curmax){
+            if (l->val > tmp){
+                tmp = l->val;
+                l = l->next;
+            } else {
+                l = l->next;
+            }
+        } else {
+            l = l->next;
+        }
+    }
+//  std::cout<<"the new current max is: "<<tmp<<std::endl;
+    return tmp;
+}
+
+list_t max_value(ListNode* l){
+    list_t tmp = 0;
+    while (l != NULL) { //will determine max value of list
+        if (l->val > tmp) {
+            tmp = l->val;
+            l = l->next;
+        } else {
+            l = l->next;
+        }
+    }
+    return tmp;
+}
+
+ListNode* ordered_copy_list(ListNode* l) {
+    ListNode* n = NULL;
+    list_t tmp = max_value(l);
+    n = cons_list(tmp, n);
+//    std::cout<<"largest value in list: "<<tmp<<std::endl;
+    while (l != NULL){
+        tmp = curmax_value(l,tmp);
+        std::cout<<"current max in list: "<<tmp<<std::endl;
+        n = cons_list(tmp,n);
+        l = l->next;
+    }
+    return n;
+}
+
 int main(){
     std::ifstream infile;
     infile.open("input.txt");
@@ -78,20 +123,12 @@ int main(){
     }
 
     infile.close();
-    //std::string user;
 
-//    list_t e, user=1;
-    std::cout<<"what values would you like to insert into the list (enter 0 to stop)"<<std::endl;
-    while (user != 0){
-        std::cin>>e;
-        if (e == 0){
-            user = 0;
-        } else {
-            ordered_insertion_list(e,l);
-            std::cout<<"Done! Next?"<<std::endl;
-        }
-    }
-    std::cout<<std::endl<<"the new list is"<<std::endl;
+    std::cout<<"original list was"<<std::endl;
     print_list(l);
+
+    std::cout<<std::endl<<"the new list is"<<std::endl;
+    print_list(ordered_copy_list(l));
+
     deallocate_list_rec(l);
 }
