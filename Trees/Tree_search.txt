@@ -31,14 +31,6 @@ TreeNode* ordered_insertion_tree(tree_t e, TreeNode* t){
     }
 }
 
-void print_tree(TreeNode* t){
-    if(t != NULL){
-        print_tree(t->left);
-        std::cout << t->val << std::endl;
-        print_tree(t->right);
-    }
-}
-
 void deallocate_tree(TreeNode* t){
     if(t != NULL){
         deallocate_tree(t->left);
@@ -47,18 +39,18 @@ void deallocate_tree(TreeNode* t){
     }
 }
 
-int count_occurrences_tree(tree_t e, TreeNode* t){
-    int n=0;
+bool search_ordered_tree(tree_t e, TreeNode* t){
     if (t == NULL){
-        return n;
-    } else if (e == t->val){
-        n++;
-        n += count_occurrences_tree(e, t->right);
-        return n;
-    } else if (e < t->val){
-        return count_occurrences_tree(e, t->left);
+        return false;
+    } else if (e == t->val) {
+        std::cout<<"value: "<<t->val<<std::endl;
+        return true;
+    } else if (e < t->val) {
+        std::cout<<"current value going left: "<<t->val<<std::endl;
+        return search_ordered_tree(e, t->left);
     } else {
-        return count_occurrences_tree(e, t->right);
+        std::cout<<"current value going right: "<<t->val<<std::endl;
+        return search_ordered_tree(e, t->right);
     }
 }
 
@@ -72,17 +64,17 @@ int main(){
     t = ordered_insertion_tree(1, t);
     t = ordered_insertion_tree(4, t);
     t = ordered_insertion_tree(18, t);
-    t = ordered_insertion_tree(6, t);
-    t = ordered_insertion_tree(6, t);
     t = ordered_insertion_tree(9, t);
-    t = ordered_insertion_tree(6,t);
 
     tree_t e;
-    std::cout<<"which value would you like to know how many times it is in the tree?"<<std::endl;
+    std::cout<<"which value would you like to know if it is in the tree?"<<std::endl;
     std::cin >> e;
-    std::cout<<"list:"<<std::endl;
-    print_tree(t);
-    std::cout<<std::endl<<"value found "<<count_occurrences_tree(e, t)<<" times"<<std::endl;
+    if (search_ordered_tree(e, t)){
+        std::cout<<"Value found!!"<<std::endl;
+    } else {
+        std::cout<<"Value not found..."<<std::endl;
+    }
+
     deallocate_tree(t);
 
 }
