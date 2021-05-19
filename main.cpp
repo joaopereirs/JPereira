@@ -21,22 +21,7 @@ struct BNode{
     // (as usual leaf nodes will have both left and right pointing to NULL)
 };
 
-//struct Counter{
-//private:
-//    int c;
-//public:
-//    Counter(){
-//        c = 0;
-//    }
-//    void inc(){
-//        c++;
-//    }
-//    int get_count() const {
-//        return c;
-//    }
-//};
-
-BNode* node_tree(std::string e, BNode* l, BNode* r){
+BNode* tree_node(std::string e, BNode* l, BNode* r){
     BNode* tmp;
     tmp = new BNode;
     tmp->val = e;
@@ -46,34 +31,34 @@ BNode* node_tree(std::string e, BNode* l, BNode* r){
 }
 
 
-BNode* empty_tree(int n, int i){ //Leonidas' work - creates a skeleton for the tree with all leaves as zero
+BNode* tree_structure(int n, int i){ //sets up the tree with all leaves as zero
     std::string s;
     if (i==n){ //n is the number of bits (not including the output --> thus 11 => n=2). When i==n it means we are at the leaf (output)
         s="0"; //s is zero because we want to fill the skeleton leaves just with zeros
-        return node_tree(s, NULL, NULL); //since it is the leaf we just fill it with zeros for now
+        return tree_node(s, NULL, NULL); //since it is the leaf we just fill it with zeros for now
     } else {
         s = "x"; //when it is not a leaf (AKA i!=n) we want to name the nodes x1 x2 etc
         i++;
         s = s + std::to_string(i); //creating the x1 x2 x3 depending on the bit
-        return node_tree(s, empty_tree(n,i),empty_tree(n, i)); //almost recursive to do the same thing over and over until we reach the leaf (n==i)
+        return tree_node(s, tree_structure(n,i),tree_structure(n, i)); //almost recursive to do the same thing over and over until we reach the leaf (n==i)
     }
 }
 
-void fill_tree(std::string e,BNode* B, int n){ //leaonidas work -- replaces the required nodes with the 1
-    std::string s = "";
+void ordered_insertion(std::string e,BNode* B, int n){
+    std::string s;
     s.push_back(e[n]);
     if (n==e.size()){
         B->val="1";
-    } else if (s=="0"){
+    } else if (s=="1"){
         n++;
-        fill_tree(e,B->left,n);
+        ordered_insertion(e,B->right,n);
     } else {
         n++;
-        fill_tree(e, B->right, n);
+        ordered_insertion(e, B->left, n);
     }
 }
 
-void deallocate_tree(BNode* t){ //changed
+void deallocate_tree(BNode* t){
     if (t != NULL){
         deallocate_tree(t->left);
         deallocate_tree(t->right);
@@ -82,23 +67,17 @@ void deallocate_tree(BNode* t){ //changed
 }
 
 BNode* build_bt(const std::vector<std::string>& fvalues) {
-
-// leonidas work:
-    int n = fvalues[0].size(); //first we figure out how many bits there are (not including output)
     BNode* B;
-    B = empty_tree(n,0); //then we make an empty tree (skeleton) that is the size of the number of bits
-    for (int i = 0; i < fvalues.size(); ++i) { //(fvalues.size() is the number of different combinations that have an output of 1) once the skeleton is made, we need to substitute the appropriate leaves with 1s
-        fill_tree(fvalues[i],B,0);
+    int len = fvalues[0].size(); //first we figure out how many bits there are (not including output)
+    B = tree_structure(len,0); //then we make an empty tree (structure) that is the size of the number of bits
+    for (int i = 0; i < fvalues.size(); ++i) { //(fvalues.size() is the number of different combinations that have an output of 1) once the structure is made, we need to substitute the appropriate leaves with 1s
+        ordered_insertion(fvalues[i],B,0);
     }
     return B;
-
 }
 
-
-
-
 // do not alter the following line that begins the function eval_bt
-std::string eval_bt(BNode* bt, const std::string& input) { //This function takes in input a pointer to the first node of a linked data structure representing a boolean function and a string representing the values for the parameters of the boolean function and returns the value of the boolean function for that configuration of values.
+std::string eval_bt(BNode* bt, const std::string& input) {
     std::string tmp;
     for (int i = 1; i < input.size(); ++i) { //so that we discard the previous MSB
         tmp.push_back(input[i]);
@@ -131,9 +110,9 @@ int main (){
 
     BNode* bt = build_bt(fvalues);
 
-    std::cout << eval_bt(bt, "000110") << std::endl;
+    std::cout << eval_bt(bt, "000100") << std::endl;
     // should print "1"
 
-    std::cout << eval_bt(bt, "000001") << std::endl;
+    std::cout << eval_bt(bt, "110011") << std::endl;
     // should print "0"
 }

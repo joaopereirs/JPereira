@@ -59,17 +59,17 @@ BNode* empty_tree(int n, int i){ //Leonidas' work - creates a skeleton for the t
     }
 }
 
-void fill_tree(std::string e,BNode* B, int n){ //leaonidas work -- replaces the required nodes with the 1
+void ordered_insertion(std::string e,BNode* B, int n){ //leaonidas work -- replaces the required nodes with the 1
     std::string s = "";
     s.push_back(e[n]);
     if (n==e.size()){
         B->val="1";
     } else if (s=="0"){
         n++;
-        fill_tree(e,B->left,n);
+        ordered_insertion(e,B->left,n);
     } else {
         n++;
-        fill_tree(e, B->right, n);
+        ordered_insertion(e, B->right, n);
     }
 }
 
@@ -88,7 +88,7 @@ BNode* build_bt(const std::vector<std::string>& fvalues) {
     BNode* B;
     B = empty_tree(n,0); //then we make an empty tree (skeleton) that is the size of the number of bits
     for (int i = 0; i < fvalues.size(); ++i) { //(fvalues.size() is the number of different combinations that have an output of 1) once the skeleton is made, we need to substitute the appropriate leaves with 1s
-        fill_tree(fvalues[i],B,0);
+        ordered_insertion(fvalues[i],B,0);
     }
     return B;
 
