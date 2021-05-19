@@ -6,17 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/Users/joaopereira_temp/CLionProjects/JPereira/main.cpp
+/Users/joaopereira/CLionProjects/JPereira/main.cpp
 iostream
--
-cmath
--
-string
 -
 vector
 -
-fstream
--
-cstdlib
+string
 -
 

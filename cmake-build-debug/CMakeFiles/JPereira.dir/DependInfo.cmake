@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/joaopereira_temp/CLionProjects/JPereira/main.cpp" "/Users/joaopereira_temp/CLionProjects/JPereira/cmake-build-debug/CMakeFiles/JPereira.dir/main.cpp.o"
+  "/Users/joaopereira/CLionProjects/JPereira/main.cpp" "/Users/joaopereira/CLionProjects/JPereira/cmake-build-debug/CMakeFiles/JPereira.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 
